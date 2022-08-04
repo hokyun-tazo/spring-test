@@ -40,7 +40,7 @@ public class AppConfig {
     public DiscountPolicy discountPolicy()
     {
         System.out.println("call AppConfig.discountPolicy");
-        return new FixDiscountPolicy();
+        return new RateDiscountPolicy();
     }
     @Bean
     public OrderService orderService()

@@ -1,5 +1,6 @@
 package scan;
 
+import org.assertj.core.api.Assertions;
 import hello.core.AppConfig;
 import hello.core.AutoAppconfig;
 import hello.core.member.Grade;
@@ -7,7 +8,6 @@ import hello.core.member.Member;
 import hello.core.member.MemberService;
 import hello.core.order.Order;
 import hello.core.order.OrderService;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -20,6 +20,7 @@ public class AutoAppConfigTest {
         ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = ac.getBean(MemberService.class);
         Assertions.assertThat(memberService).isInstanceOf(MemberService.class);
+
     }
 
     @Test

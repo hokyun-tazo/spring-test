@@ -1,42 +1,42 @@
 package algorithm;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-class Main {
-    public ArrayList<Integer> solution(int[]a , int n ,int k) {
-      ArrayList<Integer> answer = new ArrayList<>();
-        HashMap<Integer,Integer>hash = new HashMap<>();
-        int lt = 0;
-        for(int i =0;i<k-1;++i)
-        {
-             hash.put(a[i], hash.getOrDefault(a[i],0)+1);
-        }
-        for(int rt =k-1;rt<n;++rt) {
-            hash.put(a[rt], hash.getOrDefault(a[rt],0)+1);
-            answer.add(hash.size());
-            hash.put(a[lt],hash.get(a[lt])-1);
-            if(hash.get(a[lt])==0)
-                hash.remove(a[lt]);
-            ++lt;
-        }
-           return answer;
-        }
+import java.util.*;
 
+// 덧샘할수 있는 모든 결과에서 k번째로 큰 수를 출력
+// 배열을 오름차순 정렬해서 hash에 저장
+// 012 013 014 015 016 017 018 019
+// 023 024 025 026 027 028 029
+// 034 035 036 037 038 039
+// 045 046 047 등등등
+class Main {
+    public String solution(String str) {
+        String answer = "YES";
+        Stack<Character>stack = new Stack<>();
+        for (char x : str.toCharArray()) {
+            if(x=='(') {
+                stack.push(x);
+            }
+            else
+            {
+                if(stack.empty())
+                {
+                    return "NO";
+                }
+                else {
+                    stack.pop();
+                }
+            }
+        }
+        if(!stack.empty())
+        {
+            return "NO";
+        }
+        return answer;
+        }
     public static void main(String[] args){
         Main main = new Main();
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int k = sc.nextInt();
-        int[] a =  new int [n];
-        for(int i =0;i<n;++i)
-        {
-            a[i] = sc.nextInt();
-        }
-
-        for(int x : main.solution(a,n,k))
-        {
-            System.out.printf("%d ", x);
-        }
+        String str = sc.nextLine();
+        System.out.println(main.solution(str));
     }
 }
 
