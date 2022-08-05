@@ -1,35 +1,38 @@
 package algorithm;
 import java.util.*;
-
-// 덧샘할수 있는 모든 결과에서 k번째로 큰 수를 출력
-// 배열을 오름차순 정렬해서 hash에 저장
-// 012 013 014 015 016 017 018 019
-// 023 024 025 026 027 028 029
-// 034 035 036 037 038 039
-// 045 046 047 등등등
 class Main {
-    public String solution(String str) {
-        String answer = "YES";
-        Stack<Character>stack = new Stack<>();
-        for (char x : str.toCharArray()) {
-            if(x=='(') {
-                stack.push(x);
+    public int solution(String str) {
+        int answer = 0;
+        Stack<Integer>bagu = new Stack<>();
+        for(Character x : str.toCharArray())
+        {
+            int temp =0;
+            if(Character.isDigit(x))
+            {
+                bagu.push(x-48);
             }
             else
             {
-                if(stack.empty())
-                {
-                    return "NO";
-                }
-                else {
-                    stack.pop();
+                int rt = bagu.pop();
+                int lt = bagu.pop();
+                switch (x){
+                    case'+':
+                        bagu.push(lt+rt);
+                        break;
+                        case'-':
+                        bagu.push(lt-rt);
+                        break;
+                        case'*':
+                        bagu.push(lt*rt);
+                        break;
+                        case'/':
+                        bagu.push(lt/rt);
+                        break;
+
                 }
             }
         }
-        if(!stack.empty())
-        {
-            return "NO";
-        }
+        answer = bagu.peek();
         return answer;
         }
     public static void main(String[] args){
@@ -39,6 +42,7 @@ class Main {
         System.out.println(main.solution(str));
     }
 }
+
 
 
 
