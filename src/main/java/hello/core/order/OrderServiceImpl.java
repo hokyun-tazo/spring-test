@@ -1,5 +1,6 @@
 package hello.core.order;
 
+import hello.core.annotation.MainDiscountPolicy;
 import hello.core.discount.DiscountPolicy;
 import hello.core.discount.FixDiscountPolicy;
 import hello.core.discount.RateDiscountPolicy;
@@ -17,9 +18,10 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy;
 
 
-    //@Qualifier을 사용하는 방법
+    // 내가만든 annotation을 우선 사용하고자 하는 구현체에 선언해주고
+    // @Qualifier처럼 직접 구현체를 지정해준다
     @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, /*@Qualifier("fixDiscountPolicy")*/DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
