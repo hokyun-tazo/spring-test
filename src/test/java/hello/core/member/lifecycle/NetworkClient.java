@@ -1,4 +1,4 @@
-package hello.core.lifecycle;
+package hello.core.member.lifecycle;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
