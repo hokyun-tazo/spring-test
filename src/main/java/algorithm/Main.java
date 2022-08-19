@@ -1,51 +1,46 @@
 package algorithm;
 import java.util.*;
-
-class Main {
-    public int[] solution(int s ,int[]a,int n) {
-       int[]answer = new int[s];
-
-        for (int x : a) {
-            int pos = -1;
-            for(int i =0;i<s;++i)
-            {
-                if(answer[i]==x)
-                {
-                    pos = i;
-                }
-            }
-            if(pos==-1)
-            {
-                for(int i=s-1;i>=1;--i)
-                {
-                    answer[i]=answer[i-1];
-                }
-            }
-            else
-            {
-                for(int i = pos;i>=1;--i)
-                {
-                    answer[i]=answer[i-1];
-                }
-            }
-            answer[0]=x;
+class Point implements Comparable<Point>
+{
+    public int x,y;
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+    @Override
+    public int compareTo(Point o) {
+        if(this.x==o.x)
+        {
+            return this.y-o.y;
         }
-
+        else
+        {
+            return this.x-o.x;
+        }
+    }
+}
+class Main {
+    public ArrayList<Integer> solution(int[][]a,int n) {
+        ArrayList<Integer> answer = new ArrayList<>();
+        Arrays.sort(a,Comparator.comparing(st->st[0]));
 
         return answer;
     }
     public static void main(String[] args){
         Main main = new Main();
         Scanner sc = new Scanner(System.in);
-        int s = sc.nextInt();
         int n = sc.nextInt();
-        int []a = new int[n];
-        for(int i =0;i<n;++i)
+        ArrayList<Point>arr=new ArrayList<>();
+        for(int i=0;i<n;++i)
         {
-            a[i]=sc.nextInt();
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            arr.add(new Point(x,y));
         }
-        main.solution(s,a,n);
-
+        Collections.sort(arr);
+        for (Point x : arr) {
+            System.out.println(x.x+" "+x.y);
+        }
     }
 }
 
