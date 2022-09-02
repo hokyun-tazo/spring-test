@@ -1,7 +1,9 @@
 package jpabook.jpashop.domain;
 
+import jpabook.jpashop.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CollectionId;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,18 +12,16 @@ import java.util.List;
 @Entity
 @Getter@Setter
 public class Member {
-
     @Id@GeneratedValue
     @Column(name = "member_id")
     private Long id;
 
     private String name;
 
+
     @Embedded
     private Address address;
 
     @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
-
-
+    private List<Order>orders= new ArrayList<>();
 }

@@ -3,8 +3,10 @@ package jpabook.jpashop.domain;
 import jpabook.jpashop.domain.item.Item;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.context.annotation.EnableMBeanExport;
 
 import javax.persistence.*;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Category {
-
-    @Id
-    @GeneratedValue
+    @Id@GeneratedValue
     @Column(name = "category_id")
     private Long id;
 
@@ -22,8 +22,8 @@ public class Category {
 
     @ManyToMany
     @JoinTable(name = "category_item",
-          joinColumns = @JoinColumn(name = "category_id"),
-          inverseJoinColumns = @JoinColumn(name = "item_id"))
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id"))
     private List<Item> items = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,9 +33,10 @@ public class Category {
     @OneToMany(mappedBy = "parent")
     private List<Category>child = new ArrayList<>();
 
-    public void AddChildCategory(Category child)
-    {
+    public void addChildCategory(Category child) {
         this.child.add(child);
         child.setParent(this);
     }
+
+
 }
